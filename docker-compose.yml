@@ -1,0 +1,57 @@
+# SIH Portal - Docker Compose
+# Uses Neo4j Aura (cloud) - see .env.example for credentials
+
+version: '3.8'
+
+services:
+  postgres:
+    image: supabase/postgres:15.1.1.41
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: supabase
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'postgres']
+      interval: 5s
+      timeout: 5s
+
+  supabase-gotrue:
+    image: supabase/gotrue:v2.25.3
+    ports:
+      - '9999:9999'
+    environment:
+      GOTRUE_DB_DRIVER: pgx
+      GOTRUE_DB_DATABASE_URL: postgres://postgres:supabase@host.docker.internal:5432/postgres
+      GOTRUE_JWT_SECRET: your-jwt-secret-here
+      GOTRUE_JWT_EXP: 3600
+      GOTRUE_EXTERNAL_PHONE_ENABLED: 'true'
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  supabase-realtime:
+    image: supabase/realtime:v2.25.2
+    environment:
+      DATABASE_URL: postgres://postgres:supabase@host.docker.internal:5432/postgres
+      JWT_SECRET: your-jwt-secret-here
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  supabase-storage:
+    image: supabase/storage-api:v1.0.6
+    ports:
+      - '5000:5000'
+    environment:
+      DB_PASSWORD: supabase
+      ANON_KEY: your-anon-key-here
+      SERVICE_KEY: your-service-key-here
+      AUTH_JWT_SECRET: your-jwt-secret-here
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
