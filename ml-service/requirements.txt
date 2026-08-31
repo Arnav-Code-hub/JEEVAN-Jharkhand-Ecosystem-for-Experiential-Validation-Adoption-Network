@@ -1,7 +1,6 @@
-fastapi==0.104.1
-uvicorn==0.24.0
-python-dotenv==1.0.0
-neo4j==5.17.0
-pydantic==2.5.0
-pydantic-settings==2.1.0
-httpx==0.25.0
+fastapi>=0.115.0
+uvicorn>=0.34.0
+python-dotenv>=1.0.0
+pydantic>=2.10.0
+pydantic-settings>=2.7.0
+httpx>=0.28.0

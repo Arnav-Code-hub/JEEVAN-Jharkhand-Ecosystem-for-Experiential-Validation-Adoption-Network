@@ -1,0 +1,1776 @@
+{
+  "_comment": [
+    "Jharkhand administrative units. Seeded by src/db/seeds/seed.ts (idempotent, keyed on code).",
+    "DISTRICTS: authoritative - all 24.",
+    "BLOCKS: compiled best-effort from public sources and NOT yet verified against the official",
+    "Jharkhand government list. Verify before any production or judged use. Correcting this file",
+    "and re-running the seed is safe: existing rows are updated in place, never duplicated.",
+    "PANCHAYATS: deliberately omitted until Phase 7 (ADR-0010)."
+  ],
+  "orgUnits": [
+    {
+      "code": "jh",
+      "name": "Jharkhand",
+      "tier": "state",
+      "parentCode": null
+    },
+    {
+      "code": "jh-bokaro",
+      "name": "Bokaro",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-bokaro-chas",
+      "name": "Chas",
+      "tier": "block",
+      "parentCode": "jh-bokaro"
+    },
+    {
+      "code": "jh-bokaro-chandankiyari",
+      "name": "Chandankiyari",
+      "tier": "block",
+      "parentCode": "jh-bokaro"
+    },
+    {
+      "code": "jh-bokaro-bermo",
+      "name": "Bermo",
+      "tier": "block",
+      "parentCode": "jh-bokaro"
+    },
+    {
+      "code": "jh-bokaro-gomia",
+      "name": "Gomia",
+      "tier": "block",
+      "parentCode": "jh-bokaro"
+    },
+    {
+      "code": "jh-bokaro-peterwar",
+      "name": "Peterwar",
+      "tier": "block",
+      "parentCode": "jh-bokaro"
+    },
+    {
+      "code": "jh-bokaro-kasmar",
+      "name": "Kasmar",
+      "tier": "block",
+      "parentCode": "jh-bokaro"
+    },
+    {
+      "code": "jh-bokaro-jaridih",
+      "name": "Jaridih",
+      "tier": "block",
+      "parentCode": "jh-bokaro"
+    },
+    {
+      "code": "jh-bokaro-chandrapura",
+      "name": "Chandrapura",
+      "tier": "block",
+      "parentCode": "jh-bokaro"
+    },
+    {
+      "code": "jh-bokaro-nawadih",
+      "name": "Nawadih",
+      "tier": "block",
+      "parentCode": "jh-bokaro"
+    },
+    {
+      "code": "jh-chatra",
+      "name": "Chatra",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-chatra-chatra",
+      "name": "Chatra",
+      "tier": "block",
+      "parentCode": "jh-chatra"
+    },
+    {
+      "code": "jh-chatra-hunterganj",
+      "name": "Hunterganj",
+      "tier": "block",
+      "parentCode": "jh-chatra"
+    },
+    {
+      "code": "jh-chatra-pratappur",
+      "name": "Pratappur",
+      "tier": "block",
+      "parentCode": "jh-chatra"
+    },
+    {
+      "code": "jh-chatra-simaria",
+      "name": "Simaria",
+      "tier": "block",
+      "parentCode": "jh-chatra"
+    },
+    {
+      "code": "jh-chatra-tandwa",
+      "name": "Tandwa",
+      "tier": "block",
+      "parentCode": "jh-chatra"
+    },
+    {
+      "code": "jh-chatra-itkhori",
+      "name": "Itkhori",
+      "tier": "block",
+      "parentCode": "jh-chatra"
+    },
+    {
+      "code": "jh-chatra-mayurhand",
+      "name": "Mayurhand",
+      "tier": "block",
+      "parentCode": "jh-chatra"
+    },
+    {
+      "code": "jh-chatra-kunda",
+      "name": "Kunda",
+      "tier": "block",
+      "parentCode": "jh-chatra"
+    },
+    {
+      "code": "jh-chatra-lawalong",
+      "name": "Lawalong",
+      "tier": "block",
+      "parentCode": "jh-chatra"
+    },
+    {
+      "code": "jh-chatra-gidhaur",
+      "name": "Gidhaur",
+      "tier": "block",
+      "parentCode": "jh-chatra"
+    },
+    {
+      "code": "jh-chatra-kanhachatti",
+      "name": "Kanhachatti",
+      "tier": "block",
+      "parentCode": "jh-chatra"
+    },
+    {
+      "code": "jh-chatra-pathalgada",
+      "name": "Pathalgada",
+      "tier": "block",
+      "parentCode": "jh-chatra"
+    },
+    {
+      "code": "jh-deoghar",
+      "name": "Deoghar",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-deoghar-deoghar",
+      "name": "Deoghar",
+      "tier": "block",
+      "parentCode": "jh-deoghar"
+    },
+    {
+      "code": "jh-deoghar-mohanpur",
+      "name": "Mohanpur",
+      "tier": "block",
+      "parentCode": "jh-deoghar"
+    },
+    {
+      "code": "jh-deoghar-sarath",
+      "name": "Sarath",
+      "tier": "block",
+      "parentCode": "jh-deoghar"
+    },
+    {
+      "code": "jh-deoghar-madhupur",
+      "name": "Madhupur",
+      "tier": "block",
+      "parentCode": "jh-deoghar"
+    },
+    {
+      "code": "jh-deoghar-margomunda",
+      "name": "Margomunda",
+      "tier": "block",
+      "parentCode": "jh-deoghar"
+    },
+    {
+      "code": "jh-deoghar-devipur",
+      "name": "Devipur",
+      "tier": "block",
+      "parentCode": "jh-deoghar"
+    },
+    {
+      "code": "jh-deoghar-karon",
+      "name": "Karon",
+      "tier": "block",
+      "parentCode": "jh-deoghar"
+    },
+    {
+      "code": "jh-deoghar-palojori",
+      "name": "Palojori",
+      "tier": "block",
+      "parentCode": "jh-deoghar"
+    },
+    {
+      "code": "jh-deoghar-sarwan",
+      "name": "Sarwan",
+      "tier": "block",
+      "parentCode": "jh-deoghar"
+    },
+    {
+      "code": "jh-deoghar-sonaraythari",
+      "name": "Sonaraythari",
+      "tier": "block",
+      "parentCode": "jh-deoghar"
+    },
+    {
+      "code": "jh-dhanbad",
+      "name": "Dhanbad",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-dhanbad-dhanbad",
+      "name": "Dhanbad",
+      "tier": "block",
+      "parentCode": "jh-dhanbad"
+    },
+    {
+      "code": "jh-dhanbad-baghmara",
+      "name": "Baghmara",
+      "tier": "block",
+      "parentCode": "jh-dhanbad"
+    },
+    {
+      "code": "jh-dhanbad-baliapur",
+      "name": "Baliapur",
+      "tier": "block",
+      "parentCode": "jh-dhanbad"
+    },
+    {
+      "code": "jh-dhanbad-topchanchi",
+      "name": "Topchanchi",
+      "tier": "block",
+      "parentCode": "jh-dhanbad"
+    },
+    {
+      "code": "jh-dhanbad-govindpur",
+      "name": "Govindpur",
+      "tier": "block",
+      "parentCode": "jh-dhanbad"
+    },
+    {
+      "code": "jh-dhanbad-nirsa",
+      "name": "Nirsa",
+      "tier": "block",
+      "parentCode": "jh-dhanbad"
+    },
+    {
+      "code": "jh-dhanbad-tundi",
+      "name": "Tundi",
+      "tier": "block",
+      "parentCode": "jh-dhanbad"
+    },
+    {
+      "code": "jh-dhanbad-purbi-tundi",
+      "name": "Purbi Tundi",
+      "tier": "block",
+      "parentCode": "jh-dhanbad"
+    },
+    {
+      "code": "jh-dhanbad-kaliasole",
+      "name": "Kaliasole",
+      "tier": "block",
+      "parentCode": "jh-dhanbad"
+    },
+    {
+      "code": "jh-dhanbad-egarkunr",
+      "name": "Egarkunr",
+      "tier": "block",
+      "parentCode": "jh-dhanbad"
+    },
+    {
+      "code": "jh-dumka",
+      "name": "Dumka",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-dumka-dumka",
+      "name": "Dumka",
+      "tier": "block",
+      "parentCode": "jh-dumka"
+    },
+    {
+      "code": "jh-dumka-jama",
+      "name": "Jama",
+      "tier": "block",
+      "parentCode": "jh-dumka"
+    },
+    {
+      "code": "jh-dumka-jarmundi",
+      "name": "Jarmundi",
+      "tier": "block",
+      "parentCode": "jh-dumka"
+    },
+    {
+      "code": "jh-dumka-kathikund",
+      "name": "Kathikund",
+      "tier": "block",
+      "parentCode": "jh-dumka"
+    },
+    {
+      "code": "jh-dumka-masalia",
+      "name": "Masalia",
+      "tier": "block",
+      "parentCode": "jh-dumka"
+    },
+    {
+      "code": "jh-dumka-ramgarh",
+      "name": "Ramgarh",
+      "tier": "block",
+      "parentCode": "jh-dumka"
+    },
+    {
+      "code": "jh-dumka-raneshwar",
+      "name": "Raneshwar",
+      "tier": "block",
+      "parentCode": "jh-dumka"
+    },
+    {
+      "code": "jh-dumka-saraiyahat",
+      "name": "Saraiyahat",
+      "tier": "block",
+      "parentCode": "jh-dumka"
+    },
+    {
+      "code": "jh-dumka-shikaripara",
+      "name": "Shikaripara",
+      "tier": "block",
+      "parentCode": "jh-dumka"
+    },
+    {
+      "code": "jh-dumka-gopikandar",
+      "name": "Gopikandar",
+      "tier": "block",
+      "parentCode": "jh-dumka"
+    },
+    {
+      "code": "jh-east-singhbhum",
+      "name": "East Singhbhum",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-east-singhbhum-jamshedpur",
+      "name": "Jamshedpur",
+      "tier": "block",
+      "parentCode": "jh-east-singhbhum"
+    },
+    {
+      "code": "jh-east-singhbhum-potka",
+      "name": "Potka",
+      "tier": "block",
+      "parentCode": "jh-east-singhbhum"
+    },
+    {
+      "code": "jh-east-singhbhum-patamda",
+      "name": "Patamda",
+      "tier": "block",
+      "parentCode": "jh-east-singhbhum"
+    },
+    {
+      "code": "jh-east-singhbhum-boram",
+      "name": "Boram",
+      "tier": "block",
+      "parentCode": "jh-east-singhbhum"
+    },
+    {
+      "code": "jh-east-singhbhum-ghatshila",
+      "name": "Ghatshila",
+      "tier": "block",
+      "parentCode": "jh-east-singhbhum"
+    },
+    {
+      "code": "jh-east-singhbhum-musabani",
+      "name": "Musabani",
+      "tier": "block",
+      "parentCode": "jh-east-singhbhum"
+    },
+    {
+      "code": "jh-east-singhbhum-dumaria",
+      "name": "Dumaria",
+      "tier": "block",
+      "parentCode": "jh-east-singhbhum"
+    },
+    {
+      "code": "jh-east-singhbhum-gurabandha",
+      "name": "Gurabandha",
+      "tier": "block",
+      "parentCode": "jh-east-singhbhum"
+    },
+    {
+      "code": "jh-east-singhbhum-chakulia",
+      "name": "Chakulia",
+      "tier": "block",
+      "parentCode": "jh-east-singhbhum"
+    },
+    {
+      "code": "jh-east-singhbhum-baharagora",
+      "name": "Baharagora",
+      "tier": "block",
+      "parentCode": "jh-east-singhbhum"
+    },
+    {
+      "code": "jh-east-singhbhum-dhalbhumgarh",
+      "name": "Dhalbhumgarh",
+      "tier": "block",
+      "parentCode": "jh-east-singhbhum"
+    },
+    {
+      "code": "jh-garhwa",
+      "name": "Garhwa",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-garhwa-garhwa",
+      "name": "Garhwa",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-meral",
+      "name": "Meral",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-danda",
+      "name": "Danda",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-bhawanathpur",
+      "name": "Bhawanathpur",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-ketar",
+      "name": "Ketar",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-dhurki",
+      "name": "Dhurki",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-ranka",
+      "name": "Ranka",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-bhandaria",
+      "name": "Bhandaria",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-chinia",
+      "name": "Chinia",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-majhiaon",
+      "name": "Majhiaon",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-manjhiaon",
+      "name": "Manjhiaon",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-nagar-untari",
+      "name": "Nagar Untari",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-sagma",
+      "name": "Sagma",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-bardiha",
+      "name": "Bardiha",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-bishunpura",
+      "name": "Bishunpura",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-kandi",
+      "name": "Kandi",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-ramkanda",
+      "name": "Ramkanda",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-ramna",
+      "name": "Ramna",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-dandai",
+      "name": "Dandai",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-garhwa-kharaundhi",
+      "name": "Kharaundhi",
+      "tier": "block",
+      "parentCode": "jh-garhwa"
+    },
+    {
+      "code": "jh-giridih",
+      "name": "Giridih",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-giridih-giridih",
+      "name": "Giridih",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-bengabad",
+      "name": "Bengabad",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-gandey",
+      "name": "Gandey",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-jamua",
+      "name": "Jamua",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-deori",
+      "name": "Deori",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-dhanwar",
+      "name": "Dhanwar",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-birni",
+      "name": "Birni",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-tisri",
+      "name": "Tisri",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-gawan",
+      "name": "Gawan",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-dumri",
+      "name": "Dumri",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-pirtand",
+      "name": "Pirtand",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-bagodar",
+      "name": "Bagodar",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-sariya",
+      "name": "Sariya",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-giridih-rajdhanwar",
+      "name": "Rajdhanwar",
+      "tier": "block",
+      "parentCode": "jh-giridih"
+    },
+    {
+      "code": "jh-godda",
+      "name": "Godda",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-godda-godda",
+      "name": "Godda",
+      "tier": "block",
+      "parentCode": "jh-godda"
+    },
+    {
+      "code": "jh-godda-bansjora",
+      "name": "Bansjora",
+      "tier": "block",
+      "parentCode": "jh-godda"
+    },
+    {
+      "code": "jh-godda-pathargama",
+      "name": "Pathargama",
+      "tier": "block",
+      "parentCode": "jh-godda"
+    },
+    {
+      "code": "jh-godda-boarijore",
+      "name": "Boarijore",
+      "tier": "block",
+      "parentCode": "jh-godda"
+    },
+    {
+      "code": "jh-godda-sunderpahari",
+      "name": "Sunderpahari",
+      "tier": "block",
+      "parentCode": "jh-godda"
+    },
+    {
+      "code": "jh-godda-poraiyahat",
+      "name": "Poraiyahat",
+      "tier": "block",
+      "parentCode": "jh-godda"
+    },
+    {
+      "code": "jh-godda-mahagama",
+      "name": "Mahagama",
+      "tier": "block",
+      "parentCode": "jh-godda"
+    },
+    {
+      "code": "jh-godda-meherma",
+      "name": "Meherma",
+      "tier": "block",
+      "parentCode": "jh-godda"
+    },
+    {
+      "code": "jh-godda-thakurgangti",
+      "name": "Thakurgangti",
+      "tier": "block",
+      "parentCode": "jh-godda"
+    },
+    {
+      "code": "jh-gumla",
+      "name": "Gumla",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-gumla-gumla",
+      "name": "Gumla",
+      "tier": "block",
+      "parentCode": "jh-gumla"
+    },
+    {
+      "code": "jh-gumla-sisai",
+      "name": "Sisai",
+      "tier": "block",
+      "parentCode": "jh-gumla"
+    },
+    {
+      "code": "jh-gumla-bharno",
+      "name": "Bharno",
+      "tier": "block",
+      "parentCode": "jh-gumla"
+    },
+    {
+      "code": "jh-gumla-kamdara",
+      "name": "Kamdara",
+      "tier": "block",
+      "parentCode": "jh-gumla"
+    },
+    {
+      "code": "jh-gumla-basia",
+      "name": "Basia",
+      "tier": "block",
+      "parentCode": "jh-gumla"
+    },
+    {
+      "code": "jh-gumla-palkot",
+      "name": "Palkot",
+      "tier": "block",
+      "parentCode": "jh-gumla"
+    },
+    {
+      "code": "jh-gumla-raidih",
+      "name": "Raidih",
+      "tier": "block",
+      "parentCode": "jh-gumla"
+    },
+    {
+      "code": "jh-gumla-ghaghra",
+      "name": "Ghaghra",
+      "tier": "block",
+      "parentCode": "jh-gumla"
+    },
+    {
+      "code": "jh-gumla-bishunpur",
+      "name": "Bishunpur",
+      "tier": "block",
+      "parentCode": "jh-gumla"
+    },
+    {
+      "code": "jh-gumla-chainpur",
+      "name": "Chainpur",
+      "tier": "block",
+      "parentCode": "jh-gumla"
+    },
+    {
+      "code": "jh-gumla-dumri",
+      "name": "Dumri",
+      "tier": "block",
+      "parentCode": "jh-gumla"
+    },
+    {
+      "code": "jh-gumla-albert-ekka",
+      "name": "Albert Ekka",
+      "tier": "block",
+      "parentCode": "jh-gumla"
+    },
+    {
+      "code": "jh-hazaribagh",
+      "name": "Hazaribagh",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-hazaribagh-hazaribagh",
+      "name": "Hazaribagh",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-katkamsandi",
+      "name": "Katkamsandi",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-katkamdag",
+      "name": "Katkamdag",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-barkatha",
+      "name": "Barkatha",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-barhi",
+      "name": "Barhi",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-chalkusha",
+      "name": "Chalkusha",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-churchu",
+      "name": "Churchu",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-daru",
+      "name": "Daru",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-ichak",
+      "name": "Ichak",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-keredari",
+      "name": "Keredari",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-padma",
+      "name": "Padma",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-bishnugarh",
+      "name": "Bishnugarh",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-barkagaon",
+      "name": "Barkagaon",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-chauparan",
+      "name": "Chauparan",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-tati-jhariya",
+      "name": "Tati Jhariya",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-hazaribagh-dadi",
+      "name": "Dadi",
+      "tier": "block",
+      "parentCode": "jh-hazaribagh"
+    },
+    {
+      "code": "jh-jamtara",
+      "name": "Jamtara",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-jamtara-jamtara",
+      "name": "Jamtara",
+      "tier": "block",
+      "parentCode": "jh-jamtara"
+    },
+    {
+      "code": "jh-jamtara-narayanpur",
+      "name": "Narayanpur",
+      "tier": "block",
+      "parentCode": "jh-jamtara"
+    },
+    {
+      "code": "jh-jamtara-karmatanr",
+      "name": "Karmatanr",
+      "tier": "block",
+      "parentCode": "jh-jamtara"
+    },
+    {
+      "code": "jh-jamtara-kundhit",
+      "name": "Kundhit",
+      "tier": "block",
+      "parentCode": "jh-jamtara"
+    },
+    {
+      "code": "jh-jamtara-nala",
+      "name": "Nala",
+      "tier": "block",
+      "parentCode": "jh-jamtara"
+    },
+    {
+      "code": "jh-jamtara-fatehpur",
+      "name": "Fatehpur",
+      "tier": "block",
+      "parentCode": "jh-jamtara"
+    },
+    {
+      "code": "jh-khunti",
+      "name": "Khunti",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-khunti-khunti",
+      "name": "Khunti",
+      "tier": "block",
+      "parentCode": "jh-khunti"
+    },
+    {
+      "code": "jh-khunti-murhu",
+      "name": "Murhu",
+      "tier": "block",
+      "parentCode": "jh-khunti"
+    },
+    {
+      "code": "jh-khunti-torpa",
+      "name": "Torpa",
+      "tier": "block",
+      "parentCode": "jh-khunti"
+    },
+    {
+      "code": "jh-khunti-rania",
+      "name": "Rania",
+      "tier": "block",
+      "parentCode": "jh-khunti"
+    },
+    {
+      "code": "jh-khunti-karra",
+      "name": "Karra",
+      "tier": "block",
+      "parentCode": "jh-khunti"
+    },
+    {
+      "code": "jh-khunti-arki",
+      "name": "Arki",
+      "tier": "block",
+      "parentCode": "jh-khunti"
+    },
+    {
+      "code": "jh-koderma",
+      "name": "Koderma",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-koderma-koderma",
+      "name": "Koderma",
+      "tier": "block",
+      "parentCode": "jh-koderma"
+    },
+    {
+      "code": "jh-koderma-jainagar",
+      "name": "Jainagar",
+      "tier": "block",
+      "parentCode": "jh-koderma"
+    },
+    {
+      "code": "jh-koderma-markacho",
+      "name": "Markacho",
+      "tier": "block",
+      "parentCode": "jh-koderma"
+    },
+    {
+      "code": "jh-koderma-satgawan",
+      "name": "Satgawan",
+      "tier": "block",
+      "parentCode": "jh-koderma"
+    },
+    {
+      "code": "jh-koderma-domchanch",
+      "name": "Domchanch",
+      "tier": "block",
+      "parentCode": "jh-koderma"
+    },
+    {
+      "code": "jh-koderma-chandwara",
+      "name": "Chandwara",
+      "tier": "block",
+      "parentCode": "jh-koderma"
+    },
+    {
+      "code": "jh-latehar",
+      "name": "Latehar",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-latehar-latehar",
+      "name": "Latehar",
+      "tier": "block",
+      "parentCode": "jh-latehar"
+    },
+    {
+      "code": "jh-latehar-balumath",
+      "name": "Balumath",
+      "tier": "block",
+      "parentCode": "jh-latehar"
+    },
+    {
+      "code": "jh-latehar-barwadih",
+      "name": "Barwadih",
+      "tier": "block",
+      "parentCode": "jh-latehar"
+    },
+    {
+      "code": "jh-latehar-chandwa",
+      "name": "Chandwa",
+      "tier": "block",
+      "parentCode": "jh-latehar"
+    },
+    {
+      "code": "jh-latehar-garu",
+      "name": "Garu",
+      "tier": "block",
+      "parentCode": "jh-latehar"
+    },
+    {
+      "code": "jh-latehar-mahuadanr",
+      "name": "Mahuadanr",
+      "tier": "block",
+      "parentCode": "jh-latehar"
+    },
+    {
+      "code": "jh-latehar-manika",
+      "name": "Manika",
+      "tier": "block",
+      "parentCode": "jh-latehar"
+    },
+    {
+      "code": "jh-latehar-bariyatu",
+      "name": "Bariyatu",
+      "tier": "block",
+      "parentCode": "jh-latehar"
+    },
+    {
+      "code": "jh-latehar-herhanj",
+      "name": "Herhanj",
+      "tier": "block",
+      "parentCode": "jh-latehar"
+    },
+    {
+      "code": "jh-lohardaga",
+      "name": "Lohardaga",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-lohardaga-lohardaga",
+      "name": "Lohardaga",
+      "tier": "block",
+      "parentCode": "jh-lohardaga"
+    },
+    {
+      "code": "jh-lohardaga-kisko",
+      "name": "Kisko",
+      "tier": "block",
+      "parentCode": "jh-lohardaga"
+    },
+    {
+      "code": "jh-lohardaga-kuru",
+      "name": "Kuru",
+      "tier": "block",
+      "parentCode": "jh-lohardaga"
+    },
+    {
+      "code": "jh-lohardaga-bhandra",
+      "name": "Bhandra",
+      "tier": "block",
+      "parentCode": "jh-lohardaga"
+    },
+    {
+      "code": "jh-lohardaga-senha",
+      "name": "Senha",
+      "tier": "block",
+      "parentCode": "jh-lohardaga"
+    },
+    {
+      "code": "jh-lohardaga-kairo",
+      "name": "Kairo",
+      "tier": "block",
+      "parentCode": "jh-lohardaga"
+    },
+    {
+      "code": "jh-lohardaga-peshrar",
+      "name": "Peshrar",
+      "tier": "block",
+      "parentCode": "jh-lohardaga"
+    },
+    {
+      "code": "jh-pakur",
+      "name": "Pakur",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-pakur-pakur",
+      "name": "Pakur",
+      "tier": "block",
+      "parentCode": "jh-pakur"
+    },
+    {
+      "code": "jh-pakur-hiranpur",
+      "name": "Hiranpur",
+      "tier": "block",
+      "parentCode": "jh-pakur"
+    },
+    {
+      "code": "jh-pakur-littipara",
+      "name": "Littipara",
+      "tier": "block",
+      "parentCode": "jh-pakur"
+    },
+    {
+      "code": "jh-pakur-amrapara",
+      "name": "Amrapara",
+      "tier": "block",
+      "parentCode": "jh-pakur"
+    },
+    {
+      "code": "jh-pakur-maheshpur",
+      "name": "Maheshpur",
+      "tier": "block",
+      "parentCode": "jh-pakur"
+    },
+    {
+      "code": "jh-pakur-pakuria",
+      "name": "Pakuria",
+      "tier": "block",
+      "parentCode": "jh-pakur"
+    },
+    {
+      "code": "jh-palamu",
+      "name": "Palamu",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-palamu-daltonganj",
+      "name": "Daltonganj",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-chainpur",
+      "name": "Chainpur",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-bishrampur",
+      "name": "Bishrampur",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-hussainabad",
+      "name": "Hussainabad",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-hariharganj",
+      "name": "Hariharganj",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-panki",
+      "name": "Panki",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-patan",
+      "name": "Patan",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-chhatarpur",
+      "name": "Chhatarpur",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-nawa-bazar",
+      "name": "Nawa Bazar",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-manatu",
+      "name": "Manatu",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-pandu",
+      "name": "Pandu",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-lesliganj",
+      "name": "Lesliganj",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-ramgarh",
+      "name": "Ramgarh",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-satbarwa",
+      "name": "Satbarwa",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-tarhasi",
+      "name": "Tarhasi",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-untari-road",
+      "name": "Untari Road",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-naudiha-bazar",
+      "name": "Naudiha Bazar",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-pipra",
+      "name": "Pipra",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-haidarnagar",
+      "name": "Haidarnagar",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-mohammadganj",
+      "name": "Mohammadganj",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-palamu-pandwa",
+      "name": "Pandwa",
+      "tier": "block",
+      "parentCode": "jh-palamu"
+    },
+    {
+      "code": "jh-ramgarh",
+      "name": "Ramgarh",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-ramgarh-ramgarh",
+      "name": "Ramgarh",
+      "tier": "block",
+      "parentCode": "jh-ramgarh"
+    },
+    {
+      "code": "jh-ramgarh-patratu",
+      "name": "Patratu",
+      "tier": "block",
+      "parentCode": "jh-ramgarh"
+    },
+    {
+      "code": "jh-ramgarh-mandu",
+      "name": "Mandu",
+      "tier": "block",
+      "parentCode": "jh-ramgarh"
+    },
+    {
+      "code": "jh-ramgarh-gola",
+      "name": "Gola",
+      "tier": "block",
+      "parentCode": "jh-ramgarh"
+    },
+    {
+      "code": "jh-ramgarh-chitarpur",
+      "name": "Chitarpur",
+      "tier": "block",
+      "parentCode": "jh-ramgarh"
+    },
+    {
+      "code": "jh-ramgarh-dulmi",
+      "name": "Dulmi",
+      "tier": "block",
+      "parentCode": "jh-ramgarh"
+    },
+    {
+      "code": "jh-ranchi",
+      "name": "Ranchi",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-ranchi-ranchi",
+      "name": "Ranchi",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-kanke",
+      "name": "Kanke",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-namkum",
+      "name": "Namkum",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-ormanjhi",
+      "name": "Ormanjhi",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-angara",
+      "name": "Angara",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-silli",
+      "name": "Silli",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-sonahatu",
+      "name": "Sonahatu",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-tamar",
+      "name": "Tamar",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-bundu",
+      "name": "Bundu",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-rahe",
+      "name": "Rahe",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-burmu",
+      "name": "Burmu",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-chanho",
+      "name": "Chanho",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-mandar",
+      "name": "Mandar",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-bero",
+      "name": "Bero",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-itki",
+      "name": "Itki",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-lapung",
+      "name": "Lapung",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-nagri",
+      "name": "Nagri",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-ratu",
+      "name": "Ratu",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-ranchi-khelari",
+      "name": "Khelari",
+      "tier": "block",
+      "parentCode": "jh-ranchi"
+    },
+    {
+      "code": "jh-sahibganj",
+      "name": "Sahibganj",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-sahibganj-sahibganj",
+      "name": "Sahibganj",
+      "tier": "block",
+      "parentCode": "jh-sahibganj"
+    },
+    {
+      "code": "jh-sahibganj-rajmahal",
+      "name": "Rajmahal",
+      "tier": "block",
+      "parentCode": "jh-sahibganj"
+    },
+    {
+      "code": "jh-sahibganj-udhwa",
+      "name": "Udhwa",
+      "tier": "block",
+      "parentCode": "jh-sahibganj"
+    },
+    {
+      "code": "jh-sahibganj-barharwa",
+      "name": "Barharwa",
+      "tier": "block",
+      "parentCode": "jh-sahibganj"
+    },
+    {
+      "code": "jh-sahibganj-pathna",
+      "name": "Pathna",
+      "tier": "block",
+      "parentCode": "jh-sahibganj"
+    },
+    {
+      "code": "jh-sahibganj-borio",
+      "name": "Borio",
+      "tier": "block",
+      "parentCode": "jh-sahibganj"
+    },
+    {
+      "code": "jh-sahibganj-taljhari",
+      "name": "Taljhari",
+      "tier": "block",
+      "parentCode": "jh-sahibganj"
+    },
+    {
+      "code": "jh-sahibganj-mandro",
+      "name": "Mandro",
+      "tier": "block",
+      "parentCode": "jh-sahibganj"
+    },
+    {
+      "code": "jh-sahibganj-barhait",
+      "name": "Barhait",
+      "tier": "block",
+      "parentCode": "jh-sahibganj"
+    },
+    {
+      "code": "jh-seraikela-kharsawan",
+      "name": "Seraikela-Kharsawan",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-seraikela-kharsawan-seraikela",
+      "name": "Seraikela",
+      "tier": "block",
+      "parentCode": "jh-seraikela-kharsawan"
+    },
+    {
+      "code": "jh-seraikela-kharsawan-kharsawan",
+      "name": "Kharsawan",
+      "tier": "block",
+      "parentCode": "jh-seraikela-kharsawan"
+    },
+    {
+      "code": "jh-seraikela-kharsawan-gamharia",
+      "name": "Gamharia",
+      "tier": "block",
+      "parentCode": "jh-seraikela-kharsawan"
+    },
+    {
+      "code": "jh-seraikela-kharsawan-rajnagar",
+      "name": "Rajnagar",
+      "tier": "block",
+      "parentCode": "jh-seraikela-kharsawan"
+    },
+    {
+      "code": "jh-seraikela-kharsawan-chandil",
+      "name": "Chandil",
+      "tier": "block",
+      "parentCode": "jh-seraikela-kharsawan"
+    },
+    {
+      "code": "jh-seraikela-kharsawan-ichagarh",
+      "name": "Ichagarh",
+      "tier": "block",
+      "parentCode": "jh-seraikela-kharsawan"
+    },
+    {
+      "code": "jh-seraikela-kharsawan-kuchai",
+      "name": "Kuchai",
+      "tier": "block",
+      "parentCode": "jh-seraikela-kharsawan"
+    },
+    {
+      "code": "jh-seraikela-kharsawan-nimdih",
+      "name": "Nimdih",
+      "tier": "block",
+      "parentCode": "jh-seraikela-kharsawan"
+    },
+    {
+      "code": "jh-seraikela-kharsawan-gobindpur",
+      "name": "Gobindpur",
+      "tier": "block",
+      "parentCode": "jh-seraikela-kharsawan"
+    },
+    {
+      "code": "jh-simdega",
+      "name": "Simdega",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-simdega-simdega",
+      "name": "Simdega",
+      "tier": "block",
+      "parentCode": "jh-simdega"
+    },
+    {
+      "code": "jh-simdega-kolebira",
+      "name": "Kolebira",
+      "tier": "block",
+      "parentCode": "jh-simdega"
+    },
+    {
+      "code": "jh-simdega-bano",
+      "name": "Bano",
+      "tier": "block",
+      "parentCode": "jh-simdega"
+    },
+    {
+      "code": "jh-simdega-jaldega",
+      "name": "Jaldega",
+      "tier": "block",
+      "parentCode": "jh-simdega"
+    },
+    {
+      "code": "jh-simdega-kurdeg",
+      "name": "Kurdeg",
+      "tier": "block",
+      "parentCode": "jh-simdega"
+    },
+    {
+      "code": "jh-simdega-pakartanr",
+      "name": "Pakartanr",
+      "tier": "block",
+      "parentCode": "jh-simdega"
+    },
+    {
+      "code": "jh-simdega-thethaitangar",
+      "name": "Thethaitangar",
+      "tier": "block",
+      "parentCode": "jh-simdega"
+    },
+    {
+      "code": "jh-simdega-bansjor",
+      "name": "Bansjor",
+      "tier": "block",
+      "parentCode": "jh-simdega"
+    },
+    {
+      "code": "jh-simdega-bolba",
+      "name": "Bolba",
+      "tier": "block",
+      "parentCode": "jh-simdega"
+    },
+    {
+      "code": "jh-simdega-kersai",
+      "name": "Kersai",
+      "tier": "block",
+      "parentCode": "jh-simdega"
+    },
+    {
+      "code": "jh-west-singhbhum",
+      "name": "West Singhbhum",
+      "tier": "district",
+      "parentCode": "jh"
+    },
+    {
+      "code": "jh-west-singhbhum-chaibasa",
+      "name": "Chaibasa",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-chakradharpur",
+      "name": "Chakradharpur",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-jhinkpani",
+      "name": "Jhinkpani",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-tantnagar",
+      "name": "Tantnagar",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-khuntpani",
+      "name": "Khuntpani",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-manjhgaon",
+      "name": "Manjhgaon",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-manjhari",
+      "name": "Manjhari",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-jagannathpur",
+      "name": "Jagannathpur",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-noamundi",
+      "name": "Noamundi",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-hatgamharia",
+      "name": "Hatgamharia",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-kumardungi",
+      "name": "Kumardungi",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-majhgaon",
+      "name": "Majhgaon",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-sonua",
+      "name": "Sonua",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-goilkera",
+      "name": "Goilkera",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-anandpur",
+      "name": "Anandpur",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-bandgaon",
+      "name": "Bandgaon",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-gudri",
+      "name": "Gudri",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-tonto",
+      "name": "Tonto",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-tebo",
+      "name": "Tebo",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-bandhgaon",
+      "name": "Bandhgaon",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-manoharpur",
+      "name": "Manoharpur",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    },
+    {
+      "code": "jh-west-singhbhum-chhota-nagra",
+      "name": "Chhota Nagra",
+      "tier": "block",
+      "parentCode": "jh-west-singhbhum"
+    }
+  ]
+}

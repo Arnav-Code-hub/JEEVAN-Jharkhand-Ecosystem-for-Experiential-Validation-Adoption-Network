@@ -1,0 +1,1412 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "summary": "Liveness and dependency readiness probe",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": [
+                          "status"
+                        ],
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {},
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": [
+                          "status"
+                        ],
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": [
+                          "status"
+                        ],
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": [
+                          "status"
+                        ],
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": [
+                          "status"
+                        ],
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "required": [
+                          "status"
+                        ],
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/api/v1/admin/hei-domains": {
+      "get": {
+        "operationId": "UsersAdminController_listHeiDomains",
+        "summary": "List the institutional email allowlist",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Administration"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "UsersAdminController_createHeiDomain",
+        "summary": "Add an institution to the email allowlist",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateHeiDomainDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Administration"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/hei-domains/{id}": {
+      "patch": {
+        "operationId": "UsersAdminController_setHeiDomainActive",
+        "summary": "Enable or disable an allowlisted institution",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetActiveDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Administration"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/users/pending": {
+      "get": {
+        "operationId": "UsersAdminController_listPending",
+        "summary": "Industry accounts awaiting manual verification",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Administration"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/users/{id}/activate": {
+      "post": {
+        "operationId": "UsersAdminController_activate",
+        "summary": "Verify and activate a pending account",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Administration"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/admin/users/{id}/suspend": {
+      "post": {
+        "operationId": "UsersAdminController_suspend",
+        "summary": "Suspend an account",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Administration"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/org-units/districts": {
+      "get": {
+        "operationId": "OrgUnitsController_listDistricts",
+        "summary": "List Jharkhand districts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organisation"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/org-units/{id}/children": {
+      "get": {
+        "operationId": "OrgUnitsController_listChildren",
+        "summary": "List the direct children of an org unit",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Organisation"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auth/otp/request": {
+      "post": {
+        "operationId": "AuthController_requestOtp",
+        "summary": "Request a one-time code by phone or email",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestOtpDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/otp/verify": {
+      "post": {
+        "operationId": "AuthController_verifyOtp",
+        "summary": "Verify a one-time code and start a session",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyOtpDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/refresh": {
+      "post": {
+        "operationId": "AuthController_refresh",
+        "summary": "Exchange a refresh token for a new token pair",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "operationId": "AuthController_logout",
+        "summary": "Revoke the session behind a refresh token",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/me": {
+      "get": {
+        "operationId": "AuthController_me",
+        "summary": "The authenticated principal",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auth/totp/confirm": {
+      "post": {
+        "operationId": "AuthController_confirmTotp",
+        "summary": "Complete TOTP enrolment and receive the first session",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmTotpDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/media/upload-url": {
+      "post": {
+        "operationId": "MediaController_requestUpload",
+        "summary": "Request a presigned upload URL",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestUploadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Media"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/media/{id}/confirm": {
+      "post": {
+        "operationId": "MediaController_confirm",
+        "summary": "Confirm the bytes landed and validate the stored object",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Media"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/media/{id}/download-url": {
+      "get": {
+        "operationId": "MediaController_download",
+        "summary": "Short-lived signed read URL; objects are never public",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Media"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/issues": {
+      "post": {
+        "operationId": "IssuesController_create",
+        "summary": "Submit an issue. Idempotent when a clientId is supplied.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateIssueDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Issues"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "IssuesController_findAll",
+        "summary": "List issues (paginated, PII masked by role)",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "submitted",
+                "under_review",
+                "verified",
+                "rejected",
+                "in_progress",
+                "resolved"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Issues"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/issues/sync": {
+      "post": {
+        "operationId": "IssuesController_sync",
+        "summary": "Sync a batch of offline submissions",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncIssuesDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Issues"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/issues/review-queue": {
+      "get": {
+        "operationId": "IssuesController_getReviewQueue",
+        "summary": "G1 queue: issues awaiting a decision (paginated)",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Issues"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/issues/{id}": {
+      "get": {
+        "operationId": "IssuesController_findOne",
+        "summary": "Get a single issue (PII masked by role)",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Issues"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "IssuesController_update",
+        "summary": "Update an issue",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateIssueDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Issues"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/projects": {
+      "get": {
+        "operationId": "ProjectsController_findAll",
+        "summary": "List projects visible to the caller",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "state",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "g1_passed",
+                "g2_passed",
+                "g3_passed",
+                "g4_passed",
+                "deployed",
+                "deployed_verified",
+                "on_hold",
+                "cancelled"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/projects/{id}": {
+      "get": {
+        "operationId": "ProjectsController_findOne",
+        "summary": "Get a project by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/projects/{id}/issues": {
+      "get": {
+        "operationId": "ProjectsController_linkedIssues",
+        "summary": "Issues linked to this project, including merged ones",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/gates/g1/{issueId}/decision": {
+      "post": {
+        "operationId": "GatesController_decideG1",
+        "summary": "G1 Actionability decision — pass creates the Structured Demand Profile",
+        "parameters": [
+          {
+            "name": "issueId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/G1DecisionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Gates"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/gates/projects/{projectId}/history": {
+      "get": {
+        "operationId": "GatesController_history",
+        "summary": "Immutable gate decision history for a project",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "default": 0,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Gates"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "JEEVAN API",
+    "description": "Jharkhand Ecosystem for Experiential Validation Adoption Network",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "CreateHeiDomainDto": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "example": "bitmesra.ac.in"
+          },
+          "institutionName": {
+            "type": "string",
+            "example": "Birla Institute of Technology, Mesra"
+          },
+          "orgUnitId": {
+            "type": "string",
+            "description": "HEI-tier org unit students are attached to"
+          }
+        },
+        "required": [
+          "domain",
+          "institutionName"
+        ]
+      },
+      "SetActiveDto": {
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean",
+            "example": false
+          }
+        },
+        "required": [
+          "isActive"
+        ]
+      },
+      "RequestOtpDto": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "example": "+919876543210",
+            "description": "E.164 phone number (citizens) or email address (all other roles)"
+          }
+        },
+        "required": [
+          "identifier"
+        ]
+      },
+      "VerifyOtpDto": {
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "example": "+919876543210"
+          },
+          "otp": {
+            "type": "string",
+            "example": "482913"
+          },
+          "totp": {
+            "type": "string",
+            "example": "123456",
+            "description": "TOTP code. Required for government roles (parameter.md §2)."
+          }
+        },
+        "required": [
+          "identifier",
+          "otp"
+        ]
+      },
+      "RefreshTokenDto": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "refreshToken"
+        ]
+      },
+      "ConfirmTotpDto": {
+        "type": "object",
+        "properties": {
+          "enrolmentToken": {
+            "type": "string",
+            "description": "Token returned by otp/verify when enrolment is required"
+          },
+          "code": {
+            "type": "string",
+            "example": "123456"
+          }
+        },
+        "required": [
+          "enrolmentToken",
+          "code"
+        ]
+      },
+      "RequestUploadDto": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "photo",
+              "video",
+              "audio",
+              "document"
+            ]
+          },
+          "mimeType": {
+            "type": "string",
+            "example": "image/jpeg"
+          },
+          "sizeBytes": {
+            "type": "number",
+            "example": 482913,
+            "description": "Declared size; re-checked on confirm"
+          },
+          "latitude": {
+            "type": "number",
+            "description": "Capture latitude. Required for photo and video."
+          },
+          "longitude": {
+            "type": "number",
+            "description": "Capture longitude. Required for photo and video."
+          },
+          "capturedAt": {
+            "type": "string",
+            "example": "2026-08-31T09:15:00Z"
+          }
+        },
+        "required": [
+          "kind",
+          "mimeType",
+          "sizeBytes"
+        ]
+      },
+      "CreateIssueDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Broken water pipe on main road"
+          },
+          "description": {
+            "type": "string",
+            "example": "Water pipe burst near Ranchi market causing flooding"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "water",
+              "roads",
+              "electricity",
+              "sanitation",
+              "education",
+              "healthcare",
+              "agriculture",
+              "other"
+            ]
+          },
+          "channel": {
+            "type": "string",
+            "enum": [
+              "web",
+              "mobile",
+              "whatsapp",
+              "voice"
+            ]
+          },
+          "citizenName": {
+            "type": "string",
+            "example": "Rajesh Kumar"
+          },
+          "citizenPhone": {
+            "type": "string",
+            "example": "+919876543210"
+          },
+          "citizenEmail": {
+            "type": "string",
+            "example": "citizen@example.com"
+          },
+          "latitude": {
+            "type": "number",
+            "example": 23.3441
+          },
+          "longitude": {
+            "type": "number",
+            "example": 85.3096
+          },
+          "address": {
+            "type": "string",
+            "example": "Near Ranchi Main Market"
+          },
+          "district": {
+            "type": "string",
+            "example": "Ranchi"
+          },
+          "block": {
+            "type": "string",
+            "example": "Kanke"
+          },
+          "mediaIds": {
+            "description": "Confirmed media ids to attach",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clientId": {
+            "type": "string",
+            "description": "Client-generated idempotency key. Resubmitting the same key returns the existing issue."
+          },
+          "isEmergency": {
+            "type": "boolean",
+            "example": false
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "category",
+          "citizenName"
+        ]
+      },
+      "SyncIssuesDto": {
+        "type": "object",
+        "properties": {
+          "issues": {
+            "maxItems": 50,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateIssueDto"
+            }
+          }
+        },
+        "required": [
+          "issues"
+        ]
+      },
+      "UpdateIssueDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Broken water pipe on main road"
+          },
+          "description": {
+            "type": "string",
+            "example": "Water pipe burst near Ranchi market causing flooding"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "water",
+              "roads",
+              "electricity",
+              "sanitation",
+              "education",
+              "healthcare",
+              "agriculture",
+              "other"
+            ]
+          },
+          "channel": {
+            "type": "string",
+            "enum": [
+              "web",
+              "mobile",
+              "whatsapp",
+              "voice"
+            ]
+          },
+          "citizenName": {
+            "type": "string",
+            "example": "Rajesh Kumar"
+          },
+          "citizenPhone": {
+            "type": "string",
+            "example": "+919876543210"
+          },
+          "citizenEmail": {
+            "type": "string",
+            "example": "citizen@example.com"
+          },
+          "latitude": {
+            "type": "number",
+            "example": 23.3441
+          },
+          "longitude": {
+            "type": "number",
+            "example": 85.3096
+          },
+          "address": {
+            "type": "string",
+            "example": "Near Ranchi Main Market"
+          },
+          "district": {
+            "type": "string",
+            "example": "Ranchi"
+          },
+          "block": {
+            "type": "string",
+            "example": "Kanke"
+          },
+          "mediaIds": {
+            "description": "Confirmed media ids to attach",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clientId": {
+            "type": "string",
+            "description": "Client-generated idempotency key. Resubmitting the same key returns the existing issue."
+          },
+          "isEmergency": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "G1DecisionDto": {
+        "type": "object",
+        "properties": {
+          "pass": {
+            "type": "boolean",
+            "description": "true passes the gate, false rejects the issue"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Required when failing. Never include citizen PII (parameter.md §8)."
+          },
+          "orgUnitId": {
+            "type": "string",
+            "description": "Territorial org unit the project belongs to"
+          }
+        },
+        "required": [
+          "pass"
+        ]
+      }
+    }
+  }
+}

@@ -3,50 +3,77 @@
 **Objective:** Build a scalable, NEP-2020 aligned, closed-loop innovation ecosystem.
 
 ## 0. Build Sequencing (READ THIS FIRST)
-Do not attempt to build all four modules and all four gates in a single pass. Build in this order, and treat each step as a working, testable slice before moving to the next:
+Do not attempt to build all four gates and every stakeholder capability in a single pass. Build one working, testable slice at a time.
 
-1. **Citizen/User Module** — intake form, geotagging, offline sync, status tracking, phone+OTP auth.
-2. **Government/Admin Module + Gate G1** — District Innovation Cell review queue, Structured Demand Profile generation, emergency bypass rule.
-3. **Student/University Module + Gate G2** — HEI onboarding, readiness-weighted routing, consortium formation, Gen-AI Starter Kit (mocked).
-4. **Industry/CSR Module + Escrow (mocked) + Gates G3/G4** — matchmaking, project charter, pilot sign-off, community handoff, ownership transfer.
-5. **Predictive Engine, Gamification, Leaderboard, Blockchain Badges** — build last, only once the core pipeline above is functional end-to-end.
+**The authoritative, phase-by-phase roadmap now lives in [`implementation_plan.md`](./implementation_plan.md).** That document supersedes the summary below and must be kept in sync with it. The ordering below is the feature-level intent; `implementation_plan.md` expresses it against the domain module axis defined in §1 and adds the cross-cutting foundation work that must precede it.
 
-If a request asks for "the whole platform," build module 1 first and confirm before proceeding to the next.
+Feature-level order of delivery (each a vertical slice through the domain modules, not a role module):
+
+0. **Foundation first.** Config, migrations, logging, error handling, and identity/RBAC are cross-cutting and must exist before any capability slice is called "done". A capability built before identity exists will be rebuilt.
+1. **Citizen intake** — `issues` + `auth` + `users`: intake, geotagging, evidence/media, offline sync, status tracking, phone+OTP.
+2. **Gate G1 + review** — `gates` + `projects`: District Innovation Cell review queue, Structured Demand Profile generation, emergency bypass rule.
+3. **HEI routing + Gate G2** — `hei` + `competencies`: HEI onboarding, readiness-weighted routing, consortium formation, Gen-AI Starter Kit (mocked).
+4. **Funding + Gates G3/G4** — `funding` + `notifications`: matchmaking, project charter, escrow (mocked), pilot sign-off, community handoff, ownership transfer.
+5. **Predictive Engine, Gamification, Leaderboard, Credentials** — `reporting`: build last, only once the core pipeline above is functional end-to-end.
+
+If a request asks for "the whole platform," build the foundation and slice 1 first, then confirm before proceeding.
 
 ## 1. Architectural Directives & Code Structure (STRICT MODULARITY)
 *   **Tech Stack Strict Adherence:** You must exclusively use [Next.js/React] for the web portal, [Flutter] for the mobile app, [Node.js/NestJS] for the backend API, and [Python/FastAPI] for the AI/ML microservices.
-*   **Role-Based Modular Architecture:** Do NOT hardcode the platform into a single monolithic codebase or single massive UI file. You must structure the codebase with strict separation of concerns for the four primary stakeholders:
-    1.  **Citizen / User Module**
-    2.  **Student / University Module**
-    3.  **Government / Admin Module**
-    4.  **Industry / CSR Module**
-*   **Separated UIs:** Each stakeholder must have their own distinct, dedicated UI components, dashboards, and routing logic, properly linked through a central Role-Based Access Control (RBAC) system.
+*   **Domain-Driven Backend Modules (BACKEND AXIS — supersedes any earlier role-based backend mandate):** Do NOT hardcode the platform into a single monolithic codebase. The backend MUST be split by **domain (business concept)**, never by user role.
+
+    A role-based backend split (`modules/citizen`, `modules/student`, `modules/government`, `modules/industry`) is explicitly **forbidden**, because the central entities are shared across every role: a `Project` is created by government at G1, accepted by an HEI at G2, funded by industry, signed off by a citizen at G3, and handed to a panchayat at G4. Under a role axis the gate engine has to live inside one role's module and be imported by the other three, which produces circular dependencies and shared ownership of the same service. Splitting by domain removes that class of problem entirely.
+
+    Roles remain first-class — they are expressed in the **RBAC layer and the API surface**, not in the domain module tree.
+
+*   **Separated UIs (FRONTEND AXIS — unchanged):** Each stakeholder must still have their own distinct, dedicated UI components, dashboards, and routing logic on the frontend, properly linked through a central Role-Based Access Control (RBAC) system. The role axis is correct for UI; it is only the backend domain-service axis that changes.
 *   **Target Directory Structure:** Follow this shape (adapt file extensions to the framework in use, but preserve the module boundaries):
 
 ```
 /backend
   /src
-    /modules
-      /citizen        # intake, status tracking, offline sync endpoints
-      /student         # HEI workspace, consortium, starter kit
-      /government       # admin review, gates G1-G4, dashboards
-      /industry         # matchmaking, escrow, IP workflows
-      /shared           # RBAC, auth, notification layer, audit logging
-    /ai-gateway         # async client wrappers for all AI/ML calls (mocked in dev)
-    /db
-      /postgres          # relational schemas (users, projects, gate states, escrow ledger)
-      /graph             # Neo4j schema/queries (competency knowledge graph)
+    /modules              # ONE MODULE PER DOMAIN (business concept) — never per role
+      /auth               # OTP issuance/verification, sessions, JWT, guards
+      /users              # user + org-unit records, HEI domain allowlist, verification state
+      /issues             # citizen intake, evidence/media, corroboration, status tracking
+      /projects           # structured demand profile -> project lifecycle, consortium assignment
+      /gates              # generic gate engine (G1-G4): transitions, evidence rules, audit
+      /funding            # escrow ledger, tranche release, PaymentGatewayClient
+      /hei                # institutions, faculty, student teams, academic calendars, readiness
+      /competencies       # competency taxonomy, demand/supply matching
+      /notifications      # channel-agnostic outbound messaging
+      /reporting          # dashboards, leaderboard, impact-point aggregation
+      /intake-channels    # WhatsApp / voice webhook adapters that feed /issues
+    /shared               # RBAC, audit logging, exception filters, interceptors, config
+    /ai-gateway           # async client wrappers for all AI/ML calls (mocked in dev)
+    /db                   # data source, migrations, seeds (PostgreSQL + pgvector)
 /ml-service              # Python/FastAPI — triage, extraction, prediction (mocked responses in dev)
 /web                     # Next.js — role-aware routing, one dashboard tree per role
 /mobile                  # Flutter — citizen + student facing, offline-first
 ```
 
-*   **Database Constraints:** Use **PostgreSQL** for all relational data — users, project states, gate records, escrow ledger entries. Use **Neo4j** (definitive choice, not MongoDB) for the Competency Demand/Supply Knowledge Graph. Do not split this responsibility between two databases; MongoDB is not used in this architecture.
+*   **Module Dependency Rule (enforces acyclicity):** Dependencies must flow in one direction only, from higher-level domains down to lower-level ones. A module may import from a module *below* it in this list, never from one above:
+
+    ```
+    reporting, intake-channels        (top — orchestration/read models)
+    funding, competencies, notifications
+    gates
+    projects
+    issues, hei
+    auth
+    users
+    shared                            (bottom — depended on by all, depends on none)
+    ```
+
+    If two modules appear to need each other, that is a signal the shared concept belongs in a lower module, or the interaction belongs in an event rather than a direct import. Emit a domain event instead of adding an upward import. Never resolve a cycle with `forwardRef()`.
+*   **Role expression:** Controllers may still be grouped by role for a clean API surface and RBAC clarity (e.g. a citizen-facing and an admin-facing controller over the same `issues` domain), but they must be thin and delegate to domain services. No business logic in a role-scoped controller.
+
+*   **Database Constraints (amended 2026-08-31 — see [ADR-0002](./docs/adr/0002-neo4j-vs-pgvector.md)):** Use **PostgreSQL** as the single datastore — users, project states, gate records, escrow ledger entries, and the Competency Demand/Supply model. Competency matching uses the **`pgvector`** extension for embedding similarity rather than a graph database. **Neo4j is no longer part of this architecture** (it superseded an earlier mandate naming Neo4j as definitive); MongoDB is not used either. Do not introduce a second datastore for this responsibility.
 *   **Offline-First & Accessibility:** The mobile frontend must support offline caching. UI must be designed assuming low-bandwidth environments, must support multi-language toggles (Hindi, English, Santali), and must meet WCAG 2.1 AA basics (screen-reader labels, sufficient contrast, keyboard/voice navigability) for the web portal.
 
 ## 2. Authentication & Identity
 *   **Citizens:** Phone number + OTP only. No email/password flow — assume most users are on WhatsApp/mobile and have low tolerance for account creation friction. Allow anonymous draft submission that gets bound to a verified phone number before final submit.
-*   **Students & Faculty:** Institutional email + OTP, verified against a whitelisted HEI domain list maintained by the Government/Admin module.
+*   **Students & Faculty:** Institutional email + OTP, verified against a whitelisted HEI domain list. That allowlist is owned by the `users` domain module and administered by government-role accounts.
 *   **Industry/CSR partners:** Email + OTP, with a manual verification step by an admin before the account is marked "active" and eligible for matching (prevents fake industry accounts from entering the matching pool).
 *   **Government/Admin roles:** Email + OTP plus mandatory 2FA (TOTP app), given elevated access to PII and gate-approval authority.
 *   All sessions issue short-lived JWTs with role claims consumed by the RBAC layer; do not embed PII in the JWT payload.

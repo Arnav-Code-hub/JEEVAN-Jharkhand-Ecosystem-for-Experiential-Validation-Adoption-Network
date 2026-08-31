@@ -6,15 +6,24 @@
 SIH-Portal/
 ├── backend/                  # NestJS API (Core Business Logic)
 │   ├── src/
-│   │   ├── modules/
-│   │   │   ├── citizen/      # Handles intake, offline sync logic
-│   │   │   ├── university/   # Handles consortia, NEP tagging, Kanban
-│   │   │   ├── industry/     # Handles Smart Escrow, Micro-CSR
-│   │   │   ├── government/   # Handles G1-G4 gates, dashboards
-│   │   │   └── whatsapp/     # [NEW] WhatsApp Voice-bot webhook handlers
-│   │   └── ai-gateway/       # Async client wrappers for AI/ML calls
+│   │   ├── modules/          # DOMAIN modules — one per business concept, never per role
+│   │   │   ├── auth/         # OTP, sessions, JWT issuance, guards
+│   │   │   ├── users/        # users, org units, HEI domain allowlist
+│   │   │   ├── issues/       # citizen intake, evidence, corroboration, status
+│   │   │   ├── projects/     # demand profile -> project lifecycle, consortium
+│   │   │   ├── gates/        # generic G1-G4 gate engine + transition audit
+│   │   │   ├── funding/      # escrow ledger, tranche release, payment gateway iface
+│   │   │   ├── hei/          # institutions, faculty, teams, calendars, readiness
+│   │   │   ├── competencies/ # competency taxonomy + demand/supply matching
+│   │   │   ├── notifications/# channel-agnostic outbound messaging
+│   │   │   ├── reporting/    # dashboards, leaderboard, impact points
+│   │   │   └── intake-channels/ # WhatsApp / voice webhook adapters
+│   │   ├── shared/           # RBAC, audit log, filters, interceptors, config
+│   │   ├── ai-gateway/       # Async client wrappers for AI/ML calls
+│   │   └── db/               # data source, migrations, seeds
 │   ├── package.json
-│   └── nest-cli.json
+│   ├── tsconfig.json         # typecheck + tests
+│   └── tsconfig.build.json   # build only — excludes *.spec.ts from dist/
 │
 ├── ml-service/               # Python/FastAPI (The AI Nervous System)
 │   ├── app/
@@ -38,52 +47,76 @@ SIH-Portal/
 │   ├── package.json
 │   └── next.config.js
 │
-├── mobile/                   # Flutter Mobile App
-│   ├── lib/
-│   │   ├── screens/
-│   │   ├── offline_sync/     # Critical for rural Jharkhand areas
-│   │   └── main.dart
-│   └── pubspec.yaml
+├── mobile/                   # React Native (Expo + Dev Client)
+│   ├── app/                  # Expo Router file-based routing
+│   │   ├── (tabs)/           # Bottom tab navigation
+│   │   └── _layout.tsx       # Root layout
+│   ├── src/
+│   │   ├── components/       # Shared UI components
+│   │   ├── services/         # API client, offline sync
+│   │   └── hooks/            # Custom React hooks
+│   ├── app.config.ts         # Expo config with EAS Build + config plugins
+│   ├── eas.json              # EAS Build profiles (dev/preview/production)
+│   └── package.json
 │
-├── supabase/                 # PostgreSQL + Auth
-│   └���─ migrations/
-│
-├── shared/                   # [NEW] Shared Types/Interfaces
-│   └── types/                # TypeScript interfaces for NestJS + Next.js
+├── docs/adr/                 # Architecture decision records
 │
 ├── docker-compose.yml
-├── .env
+├── .env                      # local only — gitignored, never committed
+├── .env.example              # placeholders only
+├── implementation_plan.md    # phased roadmap — start here
 └── SETUP-GUIDE.md
 ```
+
+> `supabase/` and `shared/` were removed in Phase 0. Both were empty: nothing used Supabase
+> (see `docs/adr/0001-supabase-vs-self-hosted-postgres.md`), and shared types will be generated
+> from the OpenAPI document rather than hand-maintained (`docs/adr/0013-...`).
 
 ## Prerequisites (Checklist)
 - [x] Node.js 20+ (v24.11.1 installed)
 - [x] Python 3.11+ (3.13.7 installed)
-- [x] Supabase CLI (2.116.0 installed)
 - [x] Docker Desktop (29.7.2 installed)
-- [ ] Flutter SDK (needs installation)
-- [x] Neo4j Aura (configured - cloud instance)
+- [ ] EAS CLI (`npm install -g eas-cli`)
+- [ ] Android Studio (for Android emulator + SDK)
 
-## Neo4j Aura Configuration
+Supabase CLI and Neo4j Aura are only needed if ADR-0001 / ADR-0002 are decided in their favour.
+Neither is currently used by any code.
+
+## Environment Configuration
+
+Copy `.env.example` to `.env` and fill in real values locally. **Never commit a filled-in `.env`** — `.gitignore` excludes it.
+
+```bash
+cp .env.example .env
 ```
-NEO4J_URI=neo4j+s://da0651ee.databases.neo4j.io
-NEO4J_USERNAME=da0651ee
-NEO4J_PASSWORD=6hCm8FJNZJyxywF3ZyakWbaACsQUI9_XbFUNNryJCh4
-NEO4J_DATABASE=da0651ee
-```
+
+Credentials are distributed out of band, not through this repository. Whether Neo4j is retained at all is an open architectural decision — see `docs/adr/0002-neo4j-vs-pgvector.md`.
 
 ## Quick Start Commands
 
-### 1. Install Flutter
+### 1. Set Up Mobile App (React Native / Expo)
 ```powershell
-cd C:\Users\ARNAV_TFS\OneDrive\Documents\SIH\NEW\project-setup
-.\setup-flutter.ps1
+# Install EAS CLI globally
+npm install -g eas-cli
+
+# Install mobile dependencies
+cd mobile
+npm install
+
+# Configure EAS (first time only — links to Expo account)
+eas login
+eas build:configure
+
+# Create a dev build for Android
+eas build --profile development --platform android
+
+# Start the dev server (connect to dev client, NOT Expo Go)
+npx expo start --dev-client
 ```
 
-### 2. Initialize Supabase Project
+### 2. Start PostgreSQL
 ```bash
-supabase init
-supabase start
+docker compose up -d
 ```
 
 ### 3. Install Backend Dependencies
@@ -124,11 +157,10 @@ cd web
 pnpm dev
 ```
 
-### Mobile (Flutter)
+### Mobile (React Native / Expo Dev Client)
 ```bash
 cd mobile
-flutter pub get
-flutter run
+npx expo start --dev-client
 ```
 
 ### Docker Services
@@ -138,11 +170,8 @@ docker compose logs -f
 docker compose down
 ```
 
-## First Sprint: Citizen Intake Module (G1 Gate)
-1. Create citizen user schema in Supabase
-2. Build intake API endpoints (POST /issues, GET /issues/:id)
-3. Add geotagging via Flutter mobile app
-4. Implement WhatsApp voice-bot intake flow
-5. Build admin review queue (G1 gate)
+## Where to start
 
-Run `supabase start` to initialize the database, then let me know when ready to proceed!
+The build order is defined in **[`implementation_plan.md`](./implementation_plan.md)**, not here. Start at Phase 0 and do not skip ahead — Phases 0–2 are cross-cutting foundation (decisions, config/migrations/logging, identity + RBAC) that every later domain module depends on.
+
+Run `docker compose up -d` to start PostgreSQL, then `cd backend && npm run start:dev`.

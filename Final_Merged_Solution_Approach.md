@@ -13,7 +13,9 @@ To ensure that this academic exercise translates into real-world impact, the pla
 
 ## 2. Deep Dive into the Four Pillar Modules (Role-Based Architecture)
 
-To maintain code maintainability and data security, the platform strictly segregates its architecture into four distinct modules, each with its own dedicated UI, routing logic, and Role-Based Access Control (RBAC).
+To maintain code maintainability and data security, the platform presents four distinct stakeholder experiences, each with its own dedicated UI, routing logic, and Role-Based Access Control (RBAC).
+
+> **Note on backend architecture:** the four pillars below describe *stakeholder experiences and product capabilities* — they are the correct axis for the frontend. They are **not** the backend module layout. The backend is organised by **domain** (`issues`, `projects`, `gates`, `funding`, `auth`, `users`, …), because entities such as `Project` are shared across all four pillars and a role-based backend split would force circular dependencies between them. See `parameter.md` §1 for the authoritative backend module axis and dependency rule.
 
 ### A. The Citizen/User Module (The Demand Engine)
 *   **Omnichannel Intake:** Citizens can submit challenges via a responsive Next.js web portal, a Flutter mobile app, or a conversational WhatsApp Voice-Bot. This ensures maximum accessibility across varying levels of digital literacy in Jharkhand.

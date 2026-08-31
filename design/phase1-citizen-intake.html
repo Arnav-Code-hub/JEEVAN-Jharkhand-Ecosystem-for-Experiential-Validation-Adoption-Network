@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JEEVAN Phase 1: Citizen Intake Design</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap">
+  <style>
+    :root {
+      --color-bg: #FDFCF5;
+      --color-surface: #FFFFFF;
+      --color-text: #2C2C2C;
+      --color-text-muted: #6B6B6B;
+      --color-primary: #5D8D78;
+      --color-primary-dark: #4A7060;
+      --color-accent: #D4A67A;
+      --color-accent-light: #E8C9A6;
+      --color-border: #E8E4D9;
+      --color-success: #5D8D78;
+      --color-warning: #D4A67A;
+      --color-error: #C85A5A;
+      --spacing-unit: 8px;
+      --radius: 12px;
+      --shadow: 0 4px 12px rgba(93, 141, 120, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --color-bg: #1A1A18;
+        --color-surface: #232321;
+        --color-text: #E0E0D8;
+        --color-text-muted: #A0A098;
+        --color-primary: #6DA68F;
+        --color-primary-dark: #5D8D78;
+        --color-accent: #C6986C;
+        --color-accent-light: #7E8E7E;
+        --color-border: #383834;
+        --color-success: #6DA68F;
+        --color-warning: #C6986C;
+        --color-error: #D46D6D;
+        --shadow: 0 4px 12px rgba(93, 141, 120, 0.12);
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --color-bg: #1A1A18;
+      --color-surface: #232321;
+      --color-text: #E0E0D8;
+      --color-text-muted: #A0A098;
+      --color-primary: #6DA68F;
+      --color-primary-dark: #5D8D78;
+      --color-accent: #C6986C;
+      --color-accent-light: #7E8E7E;
+      --color-border: #383834;
+      --color-success: #6DA68F;
+      --color-warning: #C6986C;
+      --color-error: #D46D6D;
+      --shadow: 0 4px 12px rgba(93, 141, 120, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-unit);
+    }
+
+    header {
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 3rem;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      background: var(--color-accent-light);
+      color: var(--color-primary-dark);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+      color: var(--color-text);
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 600px;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-accent-light);
+      color: var(--color-primary-dark);
+      border-radius: 8px;
+      font-size: 1.25rem;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      line-height: 1.2;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--color-text);
+    }
+
+    .section-description {
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(93, 141, 120, 0.12);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-icon {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-accent-light);
+      color: var(--color-primary-dark);
+      border-radius: 8px;
+      font-size: 1.125rem;
+    }
+
+    .card-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .card-description {
+      color: var(--color-text-muted);
+      font-size: 0.9375rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+    }
+
+    .feature-list li::before {
+      content: "";
+      color: var(--color-primary);
+      font-size: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .tech-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-primary);
+    }
+
+    .tech-tag .version {
+      color: var(--color-text-muted);
+      margin-left: 0.5rem;
+      font-size: 0.8125rem;
+    }
+
+    .architecture-diagram {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 1px solid var(--color-border);
+      margin-top: 2rem;
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .flow-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .node-box {
+      width: 140px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-surface);
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius);
+      color: var(--color-text);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-align: center;
+      padding: 0.75rem;
+      position: relative;
+    }
+
+    .node-icon {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-primary);
+      color: white;
+      border-radius: 50%;
+      font-size: 0.875rem;
+    }
+
+    .flow-arrow {
+      color: var(--color-text-muted);
+      font-size: 1.5rem;
+      opacity: 0.5;
+    }
+
+    .data-flow {
+      margin-top: 2rem;
+    }
+
+    .data-flow .flow-row {
+      gap: 0.5rem;
+    }
+
+    .data-flow .node-box {
+      width: 100px;
+      height: 60px;
+      border-color: var(--color-accent);
+      font-size: 0.8125rem;
+    }
+
+    .database-box {
+      width: 160px;
+      border-color: var(--color-accent-light);
+    }
+
+    .database-box .node-icon {
+      background: var(--color-accent);
+    }
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+      flex-wrap: wrap;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--color-success);
+      border-radius: 50%;
+    }
+
+    .status-dot.warning {
+      background: var(--color-warning);
+    }
+
+    .status-dot.error {
+      background: var(--color-error);
+    }
+
+    .code-preview {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      overflow-x: auto;
+      border: 1px solid var(--color-border);
+    }
+
+    .code-block {
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .code-comment {
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    .code-keyword {
+      color: var(--color-primary-dark);
+    }
+
+    .code-string {
+      color: var(--color-primary);
+    }
+
+    .code-function {
+      color: var(--color-accent);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 1.5rem;
+      border-left: 2px solid var(--color-border);
+      margin-top: 1.5rem;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1rem;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--color-primary);
+      background: var(--color-surface);
+      border-radius: 50%;
+    }
+
+    .timeline-item.completed::before {
+      background: var(--color-success);
+      border-color: var(--color-success);
+    }
+
+    .timeline-item.in-progress::before {
+      background: var(--color-warning);
+      border-color: var(--color-warning);
+    }
+
+    .timeline-date {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-title {
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-description {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.25rem;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-row {
+        flex-direction: column;
+      }
+
+      .flow-arrow {
+        transform: rotate(90deg);
+      }
+
+      .timeline {
+        padding-left: 1rem;
+      }
+
+      .timeline-item {
+        padding-left: 1.25rem;
+      }
+
+      .timeline-item::before {
+        left: -0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="header-content">
+      <span class="badge">Phase 1 Citizen Intake</span>
+      <h1>JEEVAN Citizen Intake</h1>
+    </div>
+    <p class="subtitle">A clean, accessible intake system for rural Jharkhand communities designed for low-bandwidth environments with voice-first interaction.</p>
+  </header>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🌿</div>
+      <div>
+        <h2>Design Principles</h2>
+        <p class="section-description">What shapes this system's visual identity</p>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">乡村</div>
+          <div class="card-title">Rural-First</div>
+        </div>
+        <p class="card-description">Designed for intermittent connectivity, low-bandwidth conditions, and diverse literacy levels across Jharkhand's rural communities.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🗣️</div>
+        <div class="card-title">Voice-First</div>
+        <p class="card-description">Voice recording and playback is the primary interaction mode, with text as fallback for those who prefer it.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🌍</div>
+        <div class="card-title">Multilingual</div>
+        <p class="card-description">Native language support (Hindi, English, regional dialects) with automatic translation where needed.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">✅</div>
+        <div class="card-title">Verifiable</div>
+        <p class="card-description">Every citizen submission generates an immutable record with geotagging and timestamp for transparency.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🎨</div>
+      <div>
+        <h2>Visual System</h2>
+        <p class="section-description">Color palette and typography chosen for rural accessibility</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <h3>Color Palette</h3>
+        <div class="card" style="padding: 1rem;">
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+            <div>
+              <div style="width: 60px; height: 60px; background: var(--color-primary); border-radius: 8px; margin-bottom: 0.5rem;"></div>
+              <div style="font-size: 0.875rem; font-weight: 600;">Forest Green</div>
+              <div style="font-size: 0.75rem; color: var(--color-text-muted);">#5D8D78</div>
+            </div>
+            <div>
+              <div style="width: 60px; height: 60px; background: var(--color-accent); border-radius: 8px; margin-bottom: 0.5rem;"></div>
+              <div style="font-size: 0.875rem; font-weight: 600;">Warm Sand</div>
+              <div style="font-size: 0.75rem; color: var(--color-text-muted);">#D4A67A</div>
+            </div>
+            <div>
+              <div style="width: 60px; height: 60px; background: var(--color-success); border-radius: 8px; margin-bottom: 0.5rem;"></div>
+              <div style="font-size: 0.875rem; font-weight: 600;">Success</div>
+              <div style="font-size: 0.75rem; color: var(--color-text-muted);">#5D8D78</div>
+            </div>
+            <div>
+              <div style="width: 60px; height: 60px; background: var(--color-accent-light); border-radius: 8px; margin-bottom: 0.5rem;"></div>
+              <div style="font-size: 0.875rem; font-weight: 600;">Muted Sand</div>
+              <div style="font-size: 0.75rem; color: var(--color-text-muted);">#E8C9A6</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3>Typography</h3>
+        <div class="card" style="padding: 1rem;">
+          <div style="margin-bottom: 1rem;">
+            <div style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-text-muted); margin-bottom: 0.5rem;">Display</div>
+            <div style="font-family: 'Playfair Display', serif; font-size: 2rem; line-height: 1.2;">Playfair Display</div>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-text-muted); margin-bottom: 0.5rem;">Body</div>
+            <div style="font-family: 'Inter', sans-serif; font-size: 1.125rem; line-height: 1.6;">Inter</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">📦</div>
+      <div>
+        <h2>System Architecture</h2>
+        <p class="section-description">How components communicate during citizen intake</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="flow-row">
+        <div class="flow-node">
+          <div class="node-box">
+            <span class="node-icon">📱</span>
+            Citizen App
+          </div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node">
+          <div class="node-box">
+            <span class="node-icon">☁️</span>
+            API Gateway
+          </div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node">
+          <div class="node-box">
+            <span class="node-icon">📝</span>
+            Intake Service
+          </div>
+        </div>
+      </div>
+
+      <div class="data-flow">
+        <div class="flow-row">
+          <div class="flow-node">
+            <div class="node-box database-box">
+              <span class="node-icon">📦</span>
+              PostgreSQL
+            </div>
+          </div>
+          <div class="flow-arrow">⇄</div>
+          <div class="flow-node">
+            <div class="node-box database-box">
+              <span class="node-icon">🕸️</span>
+              Neo4j
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="card-description" style="margin-top: 1.5rem;">
+        Citizen submissions flow from mobile app to NestJS API, validated and stored in PostgreSQL with Neo4j for competency relationships. The ML service processes submissions asynchronously for pattern analysis.
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🔧</div>
+      <div>
+        <h2>Technology Stack</h2>
+        <p class="section-description">Tools selected for reliability and rural compatibility</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Backend (NestJS)</h3>
+      <div class="tech-stack">
+        <span class="tech-tag">NestJS v10</span>
+        <span class="tech-tag">TypeORM v0.3</span>
+        <span class="tech-tag">PostgreSQL v15</span>
+        <span class="tech-tag">Neo4j Driver v5.17</span>
+        <span class="tech-tag">Class Validator v0.14</span>
+      </div>
+
+      <h3 style="margin-top: 1.5rem;">ML Service (FastAPI)</h3>
+      <div class="tech-stack">
+        <span class="tech-tag">FastAPI v0.115</span>
+        <span class="tech-tag">Python Neo4j v5.25</span>
+        <span class="tech-tag">Pydantic v2.10</span>
+        <span class="tech-tag">Uvicorn v0.34</span>
+      </div>
+
+      <h3 style="margin-top: 1.5rem;">Web Portal (Next.js)</h3>
+      <div class="tech-stack">
+        <span class="tech-tag">Next.js v14</span>
+        <span class="tech-tag">React v18</span>
+        <span class="tech-tag">Supabase JS v2.39</span>
+        <span class="tech-tag">Zod v3.22</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <div>
+        <h2>Implementation Timeline</h2>
+        <p class="section-description">Phase 1 sprint schedule</p>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item in-progress">
+        <div class="timeline-date">Week 1-2</div>
+        <div class="timeline-title">Database Schema & Citizen Entity</div>
+        <div class="timeline-description">Define Supabase tables for citizen intake, including geotagging, voice recording references, and status tracking.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Week 2-3</div>
+        <div class="timeline-title">Intake API Endpoints</div>
+        <div class="timeline-description">Create POST /citizens for intake, GET /citizens/:id for status tracking, with WhatsApp voice-bot webhook integration.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Week 3-4</div>
+        <div class="timeline-title">Offline Sync Logic</div>
+        <div class="timeline-description">Implement local-first data storage in Flutter app with automatic sync when connectivity is restored.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Week 4-5</div>
+        <div class="timeline-title">Admin Review Queue</div>
+        <div class="timeline-description">Build G1 gate dashboard for government officials to review and verify citizen submissions.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">📄</div>
+      <div>
+        <h2>Citizen Intake DTO</h2>
+        <p class="section-description">The data structure for new submissions</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="code-preview">
+        <div class="code-block">
+<span class="code-line"><span class="code-comment">// CitizenIntake.dto.ts - The intake payload structure</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-keyword">export interface</span> CitizenIntakeDto {</span>
+<span class="code-line">  <span class="code-comment">/* Core identification */</span></span>
+<span class="code-line">  name: string;</span>
+<span class="code-line">  phoneNumber: string;</span>
+<span class="code-line">  aadhaarHash: string;</span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="code-comment">/* Location data */</span></span>
+<span class="code-line">  location: {</span>
+<span class="code-line">    latitude: number;</span>
+<span class="code-line">    longitude: number;</span>
+<span class="code-line">    village: string;</span>
+<span class="code-line">    block: string;</span>
+<span class="code-line">    district: string;</span>
+<span class="code-line">  };</span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="code-comment">/* Issue details */</span></span>
+<span class="code-line">  category: 'infrastructure' | 'social' | 'economic' | 'other';</span>
+<span class="code-line">  severity: 'low' | 'medium' | 'high' | 'emergency';</span>
+<span class="code-line">  description: string;</span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="code-comment">/* Multimodal inputs */</span></span>
+<span class="code-line">  voiceRecordingUrl?: string;</span>
+<span class="code-line">  photos?: string[];</span>
+<span class="code-line">  hasVerifiedLocation: boolean;</span>
+<span class="code-line"></span>
+<span class="code-line">  <span class="code-comment">/* System metadata */</span></span>
+<span class="code-line">  submittedVia: 'mobile' | 'whatsapp' | 'web' | 'offline';</span>
+<span class="code-line">  offlineRecordId?: string;</span>
+<span class="code-line">}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-item">
+      <div class="status-dot"></div>
+      <span><strong>Status:</strong> Phase 1 In Progress</span>
+    </div>
+    <div class="status-item">
+      <div class="status-dot warning"></div>
+      <span>Dependencies to install (backend & ML service)</span>
+    </div>
+    <div class="status-item">
+      <div class="status-dot"></div>
+      <span>Target: G1 Citizen Intake Gate</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

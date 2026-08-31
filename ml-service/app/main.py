@@ -1,19 +1,33 @@
 """Main entry point for ML service"""
+from contextlib import asynccontextmanager
+
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
 
 load_dotenv()
 
 from app.triage.router import router as triage_router
 from app.extraction.router import router as extraction_router
 from app.prediction.router import router as prediction_router
-from app.models.neo4j_driver import neo4j_service
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    """Startup/shutdown hooks.
+
+    Neo4j was removed here per ADR-0002 — competency data lives in PostgreSQL
+    with pgvector, owned by the NestJS backend. This service holds no database
+    connection of its own; it receives everything it needs in the request body.
+    """
+    yield
+
 
 app = FastAPI(
     title="SIH ML Service",
     description="AI/ML microservices for Societal Innovation Portal",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -23,18 +37,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.on_event("startup")
-async def startup_event():
-    """Connect to Neo4j on startup"""
-    neo4j_service.connect()
-
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Close Neo4j connection on shutdown"""
-    neo4j_service.close()
 
 
 @app.get("/")

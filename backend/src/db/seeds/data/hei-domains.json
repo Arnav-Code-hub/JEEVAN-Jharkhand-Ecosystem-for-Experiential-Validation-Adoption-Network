@@ -1,0 +1,69 @@
+{
+  "_comment": [
+    "Institutional email domains for student self-registration (parameter.md section 2).",
+    "Extensible at runtime via POST /api/v1/admin/hei-domains - no deploy required.",
+    "orgUnitCode links the institution to the district it sits in."
+  ],
+  "heiDomains": [
+    {
+      "domain": "bitmesra.ac.in",
+      "institutionName": "Birla Institute of Technology, Mesra",
+      "orgUnitCode": "jh-ranchi"
+    },
+    {
+      "domain": "nitjsr.ac.in",
+      "institutionName": "National Institute of Technology, Jamshedpur",
+      "orgUnitCode": "jh-east-singhbhum"
+    },
+    {
+      "domain": "iitism.ac.in",
+      "institutionName": "Indian Institute of Technology (ISM) Dhanbad",
+      "orgUnitCode": "jh-dhanbad"
+    },
+    {
+      "domain": "ranchiuniversity.ac.in",
+      "institutionName": "Ranchi University",
+      "orgUnitCode": "jh-ranchi"
+    },
+    {
+      "domain": "cuj.ac.in",
+      "institutionName": "Central University of Jharkhand",
+      "orgUnitCode": "jh-ranchi"
+    },
+    {
+      "domain": "iiitranchi.ac.in",
+      "institutionName": "IIIT Ranchi",
+      "orgUnitCode": "jh-ranchi"
+    },
+    {
+      "domain": "bitsindri.ac.in",
+      "institutionName": "BIT Sindri, Dhanbad",
+      "orgUnitCode": "jh-dhanbad"
+    },
+    {
+      "domain": "xiss.ac.in",
+      "institutionName": "Xavier Institute of Social Service, Ranchi",
+      "orgUnitCode": "jh-ranchi"
+    },
+    {
+      "domain": "nifft.ac.in",
+      "institutionName": "National Institute of Foundry and Forge Technology",
+      "orgUnitCode": "jh-east-singhbhum"
+    },
+    {
+      "domain": "vbu.ac.in",
+      "institutionName": "Vinoba Bhave University, Hazaribagh",
+      "orgUnitCode": "jh-hazaribagh"
+    },
+    {
+      "domain": "smu.edu.in",
+      "institutionName": "Sido Kanhu Murmu University, Dumka",
+      "orgUnitCode": "jh-dumka"
+    },
+    {
+      "domain": "nppu.ac.in",
+      "institutionName": "Nilamber-Pitamber University, Palamu",
+      "orgUnitCode": "jh-palamu"
+    }
+  ]
+}

@@ -1,57 +1,68 @@
-# SIH Portal - Docker Compose
-# Uses Neo4j Aura (cloud) - see .env.example for credentials
-
-version: '3.8'
-
 services:
   postgres:
-    image: supabase/postgres:15.1.1.41
+    image: pgvector/pgvector:pg15
+    container_name: jeevan-postgres
     ports:
       - '5432:5432'
     environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
       POSTGRES_PASSWORD: supabase
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD', 'pg_isready', '-U', 'postgres']
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
       interval: 5s
       timeout: 5s
+      retries: 5
 
-  supabase-gotrue:
-    image: supabase/gotrue:v2.25.3
+  redis:
+    image: redis:7-alpine
+    container_name: jeevan-redis
+    command: ['redis-server', '--appendonly', 'yes']
     ports:
-      - '9999:9999'
-    environment:
-      GOTRUE_DB_DRIVER: pgx
-      GOTRUE_DB_DATABASE_URL: postgres://postgres:supabase@host.docker.internal:5432/postgres
-      GOTRUE_JWT_SECRET: your-jwt-secret-here
-      GOTRUE_JWT_EXP: 3600
-      GOTRUE_EXTERNAL_PHONE_ENABLED: 'true'
-    depends_on:
-      postgres:
-        condition: service_healthy
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
-  supabase-realtime:
-    image: supabase/realtime:v2.25.2
+  minio:
+    image: minio/minio:latest
+    container_name: jeevan-minio
+    command: server /data --console-address ':9001'
     environment:
-      DATABASE_URL: postgres://postgres:supabase@host.docker.internal:5432/postgres
-      JWT_SECRET: your-jwt-secret-here
-    depends_on:
-      postgres:
-        condition: service_healthy
-
-  supabase-storage:
-    image: supabase/storage-api:v1.0.6
+      MINIO_ROOT_USER: jeevan
+      MINIO_ROOT_PASSWORD: jeevan-dev-secret
     ports:
-      - '5000:5000'
-    environment:
-      DB_PASSWORD: supabase
-      ANON_KEY: your-anon-key-here
-      SERVICE_KEY: your-service-key-here
-      AUTH_JWT_SECRET: your-jwt-secret-here
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ['CMD', 'mc', 'ready', 'local']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Creates the bucket on first start so the API has somewhere to write.
+  minio-init:
+    image: minio/mc:latest
+    container_name: jeevan-minio-init
     depends_on:
-      postgres:
+      minio:
         condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 jeevan jeevan-dev-secret &&
+      mc mb --ignore-existing local/jeevan-media &&
+      echo bucket ready
+      "
 
 volumes:
   postgres_data:
+  redis_data:
+  minio_data:
